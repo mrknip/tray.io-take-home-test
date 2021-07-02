@@ -5,12 +5,12 @@ import PrivacyPage from './components/SignUpForm/PrivacyPage';
 
 function App() {
   const pages = [
-    { display: PersonalDetailsPage, name: 'Personal details' },
+    { display: PersonalDetailsPage, name: 'User' },
     { display: PrivacyPage, name: 'Privacy' },
   ];
 
   return (
-    <div className="App">
+    <div>
       <MultiPageForm pages={pages} />
     </div>
   );
