@@ -1,26 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import MultiPageForm from './components/MultiPageForm';
+import PersonalDetailsPage from './components/SignUpForm/PersonalDetailsPage';
+import PrivacyPage from './components/SignUpForm/PrivacyPage';
 
 function App() {
-  const x = { a: 'wrgw' };
+  const pages = [
+    { display: PersonalDetailsPage, name: 'Personal details' },
+    { display: PrivacyPage, name: 'Privacy' },
+  ];
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MultiPageForm pages={pages} />
     </div>
   );
 }
