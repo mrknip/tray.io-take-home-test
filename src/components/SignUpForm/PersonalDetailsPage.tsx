@@ -4,7 +4,9 @@ import TextInput from '../FormInputs/TextInput';
 
 interface PersonalDetailsPageProps {
   pageValues?: Record<string, any>;
-  onPageFieldValueChange: (fieldName: string) => (newValue: string) => void;
+  onPageFieldValueChange: (
+    fieldName: string,
+  ) => (newValue: string | boolean) => void;
   onConfirm?: () => void;
 }
 
@@ -23,27 +25,34 @@ const PersonalDetailsPage = ({
 
   return (
     <FormContainer>
+      <p>All fields marked with * are required</p>
       <TextInput
         value={name}
         onChange={onPageFieldValueChange('name')}
-        label="Name"
+        label="name:"
+        id="name"
         isRequired
       />
       <TextInput
         value={role}
         onChange={onPageFieldValueChange('role')}
-        label="Role"
+        label="role:"
+        id="role"
       />
       <TextInput
         value={email}
         onChange={onPageFieldValueChange('email')}
-        label="Email"
+        label="email:"
+        id="email"
+        inputType="email"
         isRequired
       />
       <TextInput
         value={password}
         onChange={onPageFieldValueChange('password')}
-        label="Password"
+        label="password:"
+        id="password"
+        inputType="password"
         isRequired
       />
       {arePageValuesValid && <button onClick={onConfirm}>Submit</button>}

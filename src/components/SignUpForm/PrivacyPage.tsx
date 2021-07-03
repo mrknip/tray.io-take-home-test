@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormContainer } from '../FormPage.styled';
-import TextInput from '../FormInputs/TextInput';
+import Checkbox from '../FormInputs/Checkbox';
 
 interface FormPageProps {
   pageValues?: Record<string, any>;
-  onPageFieldValueChange: (fieldName: string) => (newValue: string) => void;
+  onPageFieldValueChange: (
+    fieldName: string,
+  ) => (newValue: string | boolean) => void;
   onConfirm?: () => void;
 }
 
@@ -13,14 +15,20 @@ const FormPage = ({
   onPageFieldValueChange,
   onConfirm,
 }: FormPageProps) => {
-  const { what = '' } = pageValues;
+  const { receiveTrayIoUpdates = false, receiveRelatedProductUpdates = false } =
+    pageValues;
 
   return (
     <FormContainer>
-      <TextInput
-        value={what}
-        onChange={onPageFieldValueChange('what')}
-        label="WHAT"
+      <Checkbox
+        value={receiveTrayIoUpdates}
+        onChange={onPageFieldValueChange('receiveTrayIoUpdates')}
+        label="Receive updates about Tray.io by email"
+      />
+      <Checkbox
+        value={receiveRelatedProductUpdates}
+        onChange={onPageFieldValueChange('receiveRelatedProductUpdates')}
+        label="Receive communication by email for other products created by the Tray.io team"
       />
     </FormContainer>
   );
