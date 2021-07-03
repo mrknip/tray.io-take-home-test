@@ -16,12 +16,7 @@ const FormPage = ({
   onNextSelected,
   children,
 }: FormPageProps) => {
-  return (
-    <FormContainer>
-      {children}
-      {arePageValuesValid && <button>Submit</button>}
-    </FormContainer>
-  );
+  return <FormContainer>{children}</FormContainer>;
 };
 
 export default FormPage;

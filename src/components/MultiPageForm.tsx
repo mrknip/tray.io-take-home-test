@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-// import { FormContainer } from './MultiPageForm.styled';
+import { SubmitButton } from './MultiPageForm.styled';
 
 interface FormPage {
-  display: any;
+  display: any; // TODO - get correct typing
   name: string;
 }
 
 interface MultiPageFormProps {
   pages: FormPage[];
+  endScreen: React.ReactNode;
 }
 
-const MultiPageForm = ({ pages }: MultiPageFormProps) => {
+const MultiPageForm = ({ pages, endScreen }: MultiPageFormProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const currentPageDetails = pages[currentPage];
   const { display: ActivePage } = currentPageDetails;
@@ -30,19 +31,15 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
 
       <ActivePage
         pageValues={formData[currentPage]}
-        onPageFieldValueChange={(fieldName: string) => (newValue: string) => {
-          const currentPageValues = formData[currentPage] || {};
-
+        onPageValuesChange={(newPageValues: Record<string, any>) => {
           setFormData({
             ...formData,
-            [currentPage]: {
-              ...currentPageValues,
-              [fieldName]: newValue,
-            },
+            [currentPage]: newPageValues,
           });
         }}
-        onConfirm={goToNextPage}
       />
+
+      <SubmitButton onClick={goToNextPage}>Submit</SubmitButton>
     </div>
   );
 };
