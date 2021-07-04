@@ -17,17 +17,20 @@ export const SubmitButton = styled.button`
   }
 `;
 
-const PageContainer = css`
+export const FormContainer = styled.div`
   margin: auto;
   width: 500px;
-  height: 500px;
-  border: 1px solid red;
+`;
+
+export const PageContainer = css`
+  border: 2px solid black;
+  margin-top: 4px;
 `;
 
 export const EndScreenContainer = styled.div`
   ${PageContainer}
 `;
 
-export const FormContainer = styled.form`
+export const FormPageContainer = styled.form`
   ${PageContainer}
 `;

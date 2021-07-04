@@ -21,9 +21,10 @@ const SignUpForm = () => {
       },
     },
     { display: PrivacyPage, name: 'Privacy' },
+    { display: ConfirmationPage, name: 'Done' },
   ];
 
-  return <MultiPageForm pages={pages} endScreen={<ConfirmationPage />} />;
+  return <MultiPageForm pages={pages} />;
 };
 
 export default SignUpForm;

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {
   SubmitButton,
   FormContainer,
+  FormPageContainer,
   EndScreenContainer,
 } from './MultiPageForm.styled';
 import getValidationErrors from '../helpers/getValidationErrors';
 import { ValidatorMap } from '../types';
+import ProgressIndicator from './ProgressIndicator';
 
 interface FormPage {
   display: any; // TODO - get correct typing
@@ -15,10 +17,9 @@ interface FormPage {
 
 interface MultiPageFormProps {
   pages: FormPage[];
-  endScreen: React.ReactElement;
 }
 
-const MultiPageForm = ({ pages, endScreen }: MultiPageFormProps) => {
+const MultiPageForm = ({ pages }: MultiPageFormProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [validationErrors, setValidationErrors] = useState<Record<string, any>>(
@@ -31,11 +32,10 @@ const MultiPageForm = ({ pages, endScreen }: MultiPageFormProps) => {
     setShowErrors(false);
   }, [currentPage]);
 
-  if (currentPage === pages.length) {
-    return <EndScreenContainer>{endScreen}</EndScreenContainer>;
-  }
-
   const currentPageDetails = pages[currentPage];
+  const isLastPageToEnter = currentPage === pages.length - 2;
+  const isConfirmationPage = currentPage === pages.length - 1;
+
   const { display: ActivePage, validators: currentPageValidators = {} } =
     currentPageDetails;
 
@@ -58,35 +58,41 @@ const MultiPageForm = ({ pages, endScreen }: MultiPageFormProps) => {
   const handlePageSubmit = () => {
     const hasErrors =
       Object.values(validationErrors).filter((v) => v !== null).length > 0;
-    console.log('here');
     if (hasErrors) {
       setShowErrors(true);
     } else {
-      // submit if last page
-      //or
-      console.log('next page');
       goToNextPage();
     }
   };
 
+  const handleFormSubmit = () => {};
+
+  const activePage = (
+    <ActivePage
+      pageValues={formData[currentPage]}
+      pageValueValidationErrors={showErrors && validationErrors}
+      onPageValuesChange={handlePageValuesChange}
+    />
+  );
+
   return (
-    <div>
-      {pages.map((page, index) => (
-        <span key={page.name}>
-          {index === currentPage ? <b>{page.name}</b> : page.name}
-        </span>
-      ))}
+    <FormContainer>
+      <ProgressIndicator
+        currentStep={currentPage}
+        stepNames={pages.map((page) => page.name)}
+      />
 
-      <FormContainer>
-        <ActivePage
-          pageValues={formData[currentPage]}
-          pageValueValidationErrors={showErrors && validationErrors}
-          onPageValuesChange={handlePageValuesChange}
-        />
-      </FormContainer>
-
-      <SubmitButton onClick={handlePageSubmit}>Submit</SubmitButton>
-    </div>
+      {isConfirmationPage ? (
+        <EndScreenContainer>{activePage}</EndScreenContainer>
+      ) : (
+        <FormPageContainer>
+          {activePage}
+          {!isLastPageToEnter && (
+            <SubmitButton onClick={handlePageSubmit}>Submit</SubmitButton>
+          )}
+        </FormPageContainer>
+      )}
+    </FormContainer>
   );
 };
 
