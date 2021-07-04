@@ -17,9 +17,21 @@ const MultiPageForm = ({ pages, endScreen }: MultiPageFormProps) => {
   const { display: ActivePage } = currentPageDetails;
 
   const [formData, setFormData] = useState<Record<string, any>>({});
+  const [validationErrors, setValidationErrors] = useState<Record<string, any>>(
+    {},
+  );
 
   const goToNextPage = () =>
     setCurrentPage(Math.min(currentPage + 1, pages.length - 1));
+
+  const handlePageValuesChange = (newPageValues: Record<string, any>) => {
+    setFormData({
+      ...formData,
+      [currentPage]: newPageValues,
+    });
+
+    // Update validation errors
+  };
 
   return (
     <div>

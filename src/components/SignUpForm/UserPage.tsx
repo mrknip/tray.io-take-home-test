@@ -1,6 +1,11 @@
 import React from 'react';
 import { FormContainer } from '../FormPage.styled';
 import TextInput from '../FormInputs/TextInput';
+import {
+  isNotEmpty,
+  isValidEmail,
+  isValidPassword,
+} from '../../helpers/formValidators';
 
 interface UserPageValues {
   name: string;
@@ -22,17 +27,6 @@ interface UserPageProps {
   onConfirm?: () => void;
 }
 
-const validate = (pageValues: UserPageValues) => {
-  const { name, role, email, password } = pageValues;
-
-  const nameValid = name && name.length > 0;
-
-  return {
-    name: name,
-    email: true,
-  };
-};
-
 const UserPage = ({
   pageValues = defaultValues,
   onPageValuesChange,
@@ -41,10 +35,11 @@ const UserPage = ({
   const { name, role, email, password } = pageValues;
 
   const onFieldChange = (fieldName: string) => (newValue: any) => {
-    onPageValuesChange({
+    const newPageValues = {
       ...pageValues,
       [fieldName]: newValue,
-    });
+    };
+    onPageValuesChange(newPageValues);
   };
 
   return (
