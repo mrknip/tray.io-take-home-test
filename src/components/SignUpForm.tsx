@@ -24,7 +24,17 @@ const SignUpForm = () => {
     { display: ConfirmationPage, name: 'Done' },
   ];
 
-  return <MultiPageForm pages={pages} />;
+  const onSubmit = (formData: Record<string, any>) => {
+    const flattenedFormValues = Object.values(formData).reduce(
+      (pageValues, out) => ({ ...out, ...pageValues }),
+      {},
+    );
+    console.log(
+      `Form submitted! Data:\n${JSON.stringify(flattenedFormValues, null, 2)}`,
+    );
+  };
+
+  return <MultiPageForm pages={pages} onSubmit={onSubmit} />;
 };
 
 export default SignUpForm;

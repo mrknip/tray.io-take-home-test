@@ -11,6 +11,9 @@ export const CheckboxInput = styled.div`
   left: 0;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 20px;
   height: 20px;
   border: 2px solid black;

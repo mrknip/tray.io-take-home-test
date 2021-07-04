@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  NextPageButton,
   SubmitButton,
   FormContainer,
   FormPageContainer,
@@ -18,9 +17,10 @@ interface FormPage {
 
 interface MultiPageFormProps {
   pages: FormPage[];
+  onSubmit: (formData: Record<string, any>) => void;
 }
 
-const MultiPageForm = ({ pages }: MultiPageFormProps) => {
+const MultiPageForm = ({ pages, onSubmit }: MultiPageFormProps) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [validationErrors, setValidationErrors] = useState<Record<string, any>>(
@@ -59,9 +59,6 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
     const hasErrors =
       Object.values(validationErrors).filter((v) => v !== null).length > 0;
 
-    console.log({ ...formData });
-    console.log({ ...validationErrors });
-    console.log({ hasErrors });
     if (hasErrors) {
       setShowErrors(true);
     } else {
@@ -78,12 +75,7 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
       return;
     }
 
-    console.log(`Form submitted! Data:`);
-    const combinedFormValues = Object.values(formData).reduce(
-      (pageValues, out) => ({ ...out, ...pageValues }),
-      {},
-    );
-    console.log(JSON.stringify(combinedFormValues, null, 2));
+    onSubmit(formData);
 
     goToNextPage();
   };
@@ -108,12 +100,7 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
       ) : (
         <FormPageContainer onSubmit={handleFormSubmit}>
           {activePage}
-
-          {isLastPageToEnter ? (
-            <SubmitButton type="submit" />
-          ) : (
-            <NextPageButton onClick={handlePageSubmit}>Submit</NextPageButton>
-          )}
+          <SubmitButton />
         </FormPageContainer>
       )}
     </FormContainer>

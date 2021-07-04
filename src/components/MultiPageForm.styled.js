@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
-const BaseButton = css`
+export const SubmitButton = styled.input.attrs({
+  type: 'submit',
+})`
   background: #0a9d0d;
   box-sizing: border-box;
   position: relative;
@@ -19,14 +21,6 @@ const BaseButton = css`
     left: calc(100% + 1px);
     box-shadow: none;
   }
-`;
-
-export const NextPageButton = styled.button`
-  ${BaseButton}
-`;
-
-export const SubmitButton = styled.input`
-  ${BaseButton}
 `;
 
 export const FormContainer = styled.div`
