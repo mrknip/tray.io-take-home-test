@@ -3,6 +3,7 @@ import MultiPageForm from './MultiPageForm';
 import { FormPageProps } from '../types';
 
 describe('MultiPageForm', () => {
+  // Test setup variables
   const PageA = (props: FormPageProps<{ pageAValue: string }>) => {
     const { pageValues = { pageAValue: '' }, pageValueValidationErrors = {} } =
       props;
@@ -39,10 +40,15 @@ describe('MultiPageForm', () => {
     {
       display: PageA,
       name: 'Page A Progress Label',
+      startingValues: { name: 'value' },
     },
-    { display: PageB, name: 'Page B Progress Label' },
-    { display: PageC, name: 'Page C Progress Label' },
+    {
+      display: PageB,
+      name: 'Page B Progress Label',
+      startingValues: { name: 'value' },
+    },
   ];
+
   const pagesWithValidation = [
     {
       display: PageA,
@@ -54,20 +60,38 @@ describe('MultiPageForm', () => {
         pageAValue: 'not checked',
       },
     },
-    { display: PageB, name: 'Page B Progress Label' },
-    { display: PageC, name: 'Page C Progress Label' },
+    {
+      display: PageB,
+      name: 'Page B Progress Label',
+      startingValues: { name: 'value' },
+    },
   ];
+
+  const endScreenConfig = { display: PageC, name: 'Done' };
+
   const noop = () => {};
 
   describe('basic page navigation', () => {
     it('renders the first page first', () => {
-      render(<MultiPageForm pages={pagesWithoutValidation} onSubmit={noop} />);
+      render(
+        <MultiPageForm
+          inputPages={pagesWithoutValidation}
+          confirmationPage={endScreenConfig}
+          onSubmit={noop}
+        />,
+      );
 
       expect(screen.getByText('page A content')).toBeInTheDocument();
     });
 
     it('renders submit button on interim pages', () => {
-      render(<MultiPageForm pages={pagesWithoutValidation} onSubmit={noop} />);
+      render(
+        <MultiPageForm
+          inputPages={pagesWithoutValidation}
+          confirmationPage={endScreenConfig}
+          onSubmit={noop}
+        />,
+      );
 
       expect(
         screen.getByRole('button', { name: 'Submit' }),
@@ -75,7 +99,13 @@ describe('MultiPageForm', () => {
     });
 
     it('progresses page on submit click', () => {
-      render(<MultiPageForm pages={pagesWithoutValidation} onSubmit={noop} />);
+      render(
+        <MultiPageForm
+          inputPages={pagesWithoutValidation}
+          confirmationPage={endScreenConfig}
+          onSubmit={noop}
+        />,
+      );
 
       const submitButton = screen.getByRole('button', { name: 'Submit' });
       fireEvent.click(submitButton);
@@ -84,7 +114,13 @@ describe('MultiPageForm', () => {
     });
 
     it('does not render submit button on final pages', () => {
-      render(<MultiPageForm pages={pagesWithoutValidation} onSubmit={noop} />);
+      render(
+        <MultiPageForm
+          inputPages={pagesWithoutValidation}
+          confirmationPage={endScreenConfig}
+          onSubmit={noop}
+        />,
+      );
 
       const submitButton = screen.getByRole('button', { name: 'Submit' });
       fireEvent.click(submitButton);
@@ -96,7 +132,13 @@ describe('MultiPageForm', () => {
 
   describe('form data behaviour', () => {
     it('updates form data', () => {
-      render(<MultiPageForm pages={pagesWithoutValidation} onSubmit={noop} />);
+      render(
+        <MultiPageForm
+          inputPages={pagesWithoutValidation}
+          confirmationPage={endScreenConfig}
+          onSubmit={noop}
+        />,
+      );
       const valueContainer = screen.getByTestId('page A value');
 
       expect(valueContainer).toHaveTextContent('');
@@ -108,7 +150,13 @@ describe('MultiPageForm', () => {
     });
 
     it('does not progress screen when there are validation errors, shows errors', () => {
-      render(<MultiPageForm pages={pagesWithValidation} onSubmit={noop} />);
+      render(
+        <MultiPageForm
+          inputPages={pagesWithValidation}
+          confirmationPage={endScreenConfig}
+          onSubmit={noop}
+        />,
+      );
       const validationErrorContainer = screen.getByTestId(
         'page A validation error',
       );
@@ -124,7 +172,13 @@ describe('MultiPageForm', () => {
     });
 
     it('does not show validation errors until submission', () => {
-      render(<MultiPageForm pages={pagesWithValidation} onSubmit={noop} />);
+      render(
+        <MultiPageForm
+          inputPages={pagesWithValidation}
+          confirmationPage={endScreenConfig}
+          onSubmit={noop}
+        />,
+      );
       const validationErrorContainer = screen.getByTestId(
         'page A validation error',
       );
@@ -148,7 +202,11 @@ describe('MultiPageForm', () => {
     it('calls onSubmit when submit pressed on penultimate page', () => {
       const onSubmit = jest.fn();
       render(
-        <MultiPageForm pages={pagesWithoutValidation} onSubmit={onSubmit} />,
+        <MultiPageForm
+          inputPages={pagesWithoutValidation}
+          confirmationPage={endScreenConfig}
+          onSubmit={onSubmit}
+        />,
       );
 
       const submitButton = screen.getByRole('button', { name: 'Submit' });

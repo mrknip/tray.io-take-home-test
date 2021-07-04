@@ -14,7 +14,7 @@ import {
 } from '../helpers/formValidators';
 
 const SignUpForm = () => {
-  const pages = [
+  const inputPages = [
     {
       display: UserPage,
       name: 'User',
@@ -30,8 +30,8 @@ const SignUpForm = () => {
       name: 'Privacy',
       startingValues: privacyPageDefaultValues,
     },
-    // { display: ConfirmationPage, name: 'Done' },
   ];
+  const confirmationPage = { display: ConfirmationPage, name: 'Done' };
 
   const onSubmit = (formData: Record<string, any>) => {
     const flattenedFormValues = Object.values(formData).reduce(
@@ -43,7 +43,13 @@ const SignUpForm = () => {
     );
   };
 
-  return <MultiPageForm pages={pages} onSubmit={onSubmit} />;
+  return (
+    <MultiPageForm
+      inputPages={inputPages}
+      confirmationPage={confirmationPage}
+      onSubmit={onSubmit}
+    />
+  );
 };
 
 export default SignUpForm;

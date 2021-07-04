@@ -17,6 +17,8 @@ export const TextInputField = styled.input<TextInputFieldProps>`
   margin-top: 8px;
   margin-bottom: 16px;
   padding: 4px;
+  font-weight: bold;
+  font-family: 'Gothic A1', sans-serif; ;
 `;
 
 export const ErrorMessage = styled.div`

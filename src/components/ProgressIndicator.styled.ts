@@ -5,6 +5,8 @@ export const ProgressIndicatorContainer = styled.div`
   margin: auto;
   border: 2px solid black;
   border-radius: 2px;
+
+  box-shadow: 2px 2px 0 0 black;
 `;
 
 export const StepNameContainer = styled.div<{ isActive: boolean }>`
