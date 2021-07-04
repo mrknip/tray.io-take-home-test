@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Checkbox from '../FormInputs/Checkbox';
 import { FormPageProps } from '../FormPage';
 
@@ -13,10 +13,18 @@ const defaultValues = {
 };
 
 const PrivacyPage = ({
-  pageValues = defaultValues,
+  pageValues,
   onPageValuesChange,
   onConfirm,
 }: FormPageProps<PrivacyPageValues>) => {
+  useEffect(() => {
+    if (!pageValues) {
+      onPageValuesChange(defaultValues);
+    }
+  });
+
+  if (!pageValues) return null;
+
   const { receiveTrayIoUpdates, receiveRelatedProductUpdates } = pageValues;
 
   const onFieldChange = (fieldName: string) => (newValue: any) => {

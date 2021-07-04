@@ -15,7 +15,8 @@ export const CheckboxInput = styled.div`
   height: 20px;
   border: 2px solid black;
   border-radius: 2px;
-  display: inline-block;
+  text-align: center;
+  cursor: pointer;
 `;
 
 export const CheckBoxLabel = styled.span`

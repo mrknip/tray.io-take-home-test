@@ -1,7 +1,5 @@
-import React from 'react';
-import { FormContainer } from '../FormPage.styled';
+import React, { useEffect } from 'react';
 import TextInput from '../FormInputs/TextInput';
-import { ValidatorMap } from '../../types';
 import { FormPageProps } from '../FormPage';
 
 interface UserPageValues {
@@ -18,25 +16,20 @@ const defaultValues = {
   password: '',
 };
 
-// Make this
-// interface UserPageProps {
-//   /** Map of field names to values */
-//   pageValues?: UserPageValues;
-//   /** Map of field names to validation errors for those values */
-//   pageValueValidationErrors?: Record<string, any>;
-//   /** Array of fields that have just been submitted - used to show validation errors only on submission */
-//   submittedFieldNames: string[];
-//   /** Handler for when page's form values change */
-//   onPageValuesChange: (newPageValues: UserPageValues) => void;
-//   onConfirm?: () => void;
-// }
-
 const UserPage = ({
   pageValues = defaultValues,
   pageValueValidationErrors = {},
   onPageValuesChange,
   onConfirm,
 }: FormPageProps<UserPageValues>) => {
+  useEffect(() => {
+    if (!pageValues) {
+      onPageValuesChange(defaultValues);
+    }
+  });
+
+  if (!pageValues) return null;
+
   const { name, role, email, password } = pageValues;
 
   const onFieldChange = (fieldName: string) => (newValue: any) => {
@@ -71,7 +64,6 @@ const UserPage = ({
         errorMessage={pageValueValidationErrors.email}
         label="email:"
         id="email"
-        inputType="email"
         isRequired
       />
       <TextInput

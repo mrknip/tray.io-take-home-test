@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  NextPageButton,
   SubmitButton,
   FormContainer,
   FormPageContainer,
@@ -20,7 +21,7 @@ interface MultiPageFormProps {
 }
 
 const MultiPageForm = ({ pages }: MultiPageFormProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(2);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [validationErrors, setValidationErrors] = useState<Record<string, any>>(
     {},
@@ -39,7 +40,7 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
   const { display: ActivePage, validators: currentPageValidators = {} } =
     currentPageDetails;
 
-  const goToNextPage = () => setCurrentPage(Math.min(currentPage + 1));
+  const goToNextPage = () => setCurrentPage(currentPage + 1);
 
   const handlePageValuesChange = (newPageValues: Record<string, any>) => {
     setFormData({
@@ -51,7 +52,6 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
       newPageValues,
       currentPageValidators,
     );
-
     setValidationErrors(newValidationErrors);
   };
 
@@ -65,7 +65,17 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
     }
   };
 
-  const handleFormSubmit = () => {};
+  const handleFormSubmit = (e: any) => {
+    console.log(`Form submitted! Data:`);
+    const combinedFormValues = Object.values(formData).reduce(
+      (pageValues, out) => ({ ...out, ...pageValues }),
+      {},
+    );
+    console.log(JSON.stringify(combinedFormValues, null, 2));
+
+    goToNextPage();
+    e.preventDefault();
+  };
 
   const activePage = (
     <ActivePage
@@ -87,8 +97,11 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
       ) : (
         <FormPageContainer>
           {activePage}
-          {!isLastPageToEnter && (
-            <SubmitButton onClick={handlePageSubmit}>Submit</SubmitButton>
+
+          {isLastPageToEnter ? (
+            <SubmitButton type="submit" onClick={handleFormSubmit} />
+          ) : (
+            <NextPageButton onClick={handlePageSubmit}>Submit</NextPageButton>
           )}
         </FormPageContainer>
       )}

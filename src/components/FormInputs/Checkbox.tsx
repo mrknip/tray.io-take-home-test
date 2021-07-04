@@ -14,7 +14,7 @@ interface CheckboxProps {
 const Checkbox = ({ value, label, onChange }: CheckboxProps) => (
   <CheckboxContainer>
     <CheckboxInput onClick={() => onChange(!value)}>
-      {value === true && <div>!</div>}
+      {value === true && <div>✓</div>}
     </CheckboxInput>
     <CheckBoxLabel>{label}</CheckBoxLabel>
   </CheckboxContainer>

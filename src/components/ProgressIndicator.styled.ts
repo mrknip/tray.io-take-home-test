@@ -4,6 +4,7 @@ export const ProgressIndicatorContainer = styled.div`
   display: flex;
   margin: auto;
   border: 2px solid black;
+  border-radius: 2px;
 `;
 
 export const StepNameContainer = styled.div<{ isActive: boolean }>`
@@ -12,6 +13,7 @@ export const StepNameContainer = styled.div<{ isActive: boolean }>`
   padding: 8px;
   box-sizing: border-box;
   border-right: 2px solid black;
+  text-align: center;
 
   &:last-child {
     border-right: none;
