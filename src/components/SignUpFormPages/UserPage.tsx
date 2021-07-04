@@ -2,6 +2,7 @@ import React from 'react';
 import { FormContainer } from '../FormPage.styled';
 import TextInput from '../FormInputs/TextInput';
 import { ValidatorMap } from '../../types';
+import { FormPageProps } from '../FormPage';
 
 interface UserPageValues {
   name: string;
@@ -17,19 +18,25 @@ const defaultValues = {
   password: '',
 };
 
-interface UserPageProps {
-  pageValues?: UserPageValues;
-  pageValueValidationErrors?: Record<string, any>;
-  onPageValuesChange: (newPageValues: UserPageValues) => void;
-  onConfirm?: () => void;
-}
+// Make this
+// interface UserPageProps {
+//   /** Map of field names to values */
+//   pageValues?: UserPageValues;
+//   /** Map of field names to validation errors for those values */
+//   pageValueValidationErrors?: Record<string, any>;
+//   /** Array of fields that have just been submitted - used to show validation errors only on submission */
+//   submittedFieldNames: string[];
+//   /** Handler for when page's form values change */
+//   onPageValuesChange: (newPageValues: UserPageValues) => void;
+//   onConfirm?: () => void;
+// }
 
 const UserPage = ({
   pageValues = defaultValues,
   pageValueValidationErrors = {},
   onPageValuesChange,
   onConfirm,
-}: UserPageProps) => {
+}: FormPageProps<UserPageValues>) => {
   const { name, role, email, password } = pageValues;
 
   const onFieldChange = (fieldName: string) => (newValue: any) => {
@@ -41,7 +48,7 @@ const UserPage = ({
   };
 
   return (
-    <FormContainer>
+    <>
       <p>All fields marked with * are required</p>
       <TextInput
         value={name}
@@ -76,7 +83,7 @@ const UserPage = ({
         inputType="password"
         isRequired
       />
-    </FormContainer>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { FormContainer } from '../FormPage.styled';
 import Checkbox from '../FormInputs/Checkbox';
+import { FormPageProps } from '../FormPage';
 
 interface PrivacyPageValues {
   receiveTrayIoUpdates: boolean;
@@ -12,17 +12,11 @@ const defaultValues = {
   receiveRelatedProductUpdates: false,
 };
 
-interface FormPageProps {
-  pageValues?: PrivacyPageValues;
-  onPageValuesChange: (newPageValues: PrivacyPageValues) => void;
-  onConfirm?: () => void;
-}
-
-const FormPage = ({
+const PrivacyPage = ({
   pageValues = defaultValues,
   onPageValuesChange,
   onConfirm,
-}: FormPageProps) => {
+}: FormPageProps<PrivacyPageValues>) => {
   const { receiveTrayIoUpdates, receiveRelatedProductUpdates } = pageValues;
 
   const onFieldChange = (fieldName: string) => (newValue: any) => {
@@ -33,7 +27,7 @@ const FormPage = ({
   };
 
   return (
-    <FormContainer>
+    <>
       <Checkbox
         value={receiveTrayIoUpdates}
         onChange={onFieldChange('receiveTrayIoUpdates')}
@@ -44,8 +38,8 @@ const FormPage = ({
         onChange={onFieldChange('receiveRelatedProductUpdates')}
         label="Receive communication by email for other products created by the Tray.io team"
       />
-    </FormContainer>
+    </>
   );
 };
 
-export default FormPage;
+export default PrivacyPage;

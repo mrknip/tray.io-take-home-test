@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const SubmitButton = styled.button`
   background: #0a9d0d;
@@ -15,4 +15,19 @@ export const SubmitButton = styled.button`
     left: 1px;
     box-shadow: none;
   }
+`;
+
+const PageContainer = css`
+  margin: auto;
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+`;
+
+export const EndScreenContainer = styled.div`
+  ${PageContainer}
+`;
+
+export const FormContainer = styled.form`
+  ${PageContainer}
 `;
