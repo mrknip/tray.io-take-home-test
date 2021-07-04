@@ -1,5 +1,9 @@
 import React from 'react';
-import { CheckboxInput } from './Checkbox.styled';
+import {
+  CheckboxInput,
+  CheckBoxLabel,
+  CheckboxContainer,
+} from './Checkbox.styled';
 
 interface CheckboxProps {
   value: boolean;
@@ -8,12 +12,12 @@ interface CheckboxProps {
 }
 
 const Checkbox = ({ value, label, onChange }: CheckboxProps) => (
-  <>
+  <CheckboxContainer>
     <CheckboxInput onClick={() => onChange(!value)}>
       {value === true && <div>!</div>}
     </CheckboxInput>
-    <div>{label}</div>
-  </>
+    <CheckBoxLabel>{label}</CheckBoxLabel>
+  </CheckboxContainer>
 );
 
 export default Checkbox;

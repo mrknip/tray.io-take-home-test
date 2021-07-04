@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const TextInputContainer = styled.div`
-  /* border: 1px solid green; */
-  padding: 8px;
   user-select: none;
 `;
 

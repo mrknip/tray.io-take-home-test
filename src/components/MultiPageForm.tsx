@@ -10,7 +10,7 @@ import { ValidatorMap } from '../types';
 import ProgressIndicator from './ProgressIndicator';
 
 interface FormPage {
-  display: any; // TODO - get correct typing
+  display: any; // I struggled with the typing for React components throughout this exercise
   name: string;
   validators?: ValidatorMap;
 }

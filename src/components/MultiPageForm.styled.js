@@ -25,6 +25,7 @@ export const FormContainer = styled.div`
 export const PageContainer = css`
   border: 2px solid black;
   margin-top: 4px;
+  padding: 16px;
 `;
 
 export const EndScreenContainer = styled.div`
