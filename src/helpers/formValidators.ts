@@ -1,12 +1,12 @@
-export const isNotEmpty = (value: string, errorMessage?: string) => {
+export const isNotEmpty = (value: string): null | string => {
   if (value && value.length > 0) {
     return null;
   }
 
-  return errorMessage || 'Please fill out this required field';
+  return 'Please fill out this required field';
 };
 
-export const isValidEmail = (value: string) => {
+export const isValidEmail = (value: string): null | string => {
   // For transparency - stolen from this particular here https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
   const emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 
@@ -21,7 +21,7 @@ export const isValidEmail = (value: string) => {
   return 'Please enter a valid email address';
 };
 
-export const isValidPassword = (value: string) => {
+export const isValidPassword = (value: string): null | string => {
   const errors: Record<string, boolean> = {
     length: false,
     digit: false,

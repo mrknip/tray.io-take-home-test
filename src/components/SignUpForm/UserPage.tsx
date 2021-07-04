@@ -1,11 +1,6 @@
 import React from 'react';
 import { FormContainer } from '../FormPage.styled';
 import TextInput from '../FormInputs/TextInput';
-import {
-  isNotEmpty,
-  isValidEmail,
-  isValidPassword,
-} from '../../helpers/formValidators';
 
 interface UserPageValues {
   name: string;
