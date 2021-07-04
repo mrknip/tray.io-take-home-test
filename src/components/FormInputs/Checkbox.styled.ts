@@ -22,8 +22,9 @@ export const CheckboxInput = styled.div`
   cursor: pointer;
 `;
 
-export const CheckBoxLabel = styled.span`
+export const CheckBoxLabel = styled.label`
   max-width: calc(100% - 30px);
   display: inline-block;
   vertical-align: middle;
+  cursor: pointer;
 `;

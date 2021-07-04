@@ -26,7 +26,7 @@ describe('TextInput', () => {
 
   it('value not empty - renders input value', () => {
     render(<TextInput {...baseProps} value="test value" label="test_label" />);
-    const textInput = screen.getByRole('textbox', { id: 'testInput' });
+    const textInput = screen.getByRole('textbox', { name: 'test_label' });
 
     expect(textInput).toHaveDisplayValue('test value');
   });
@@ -44,13 +44,11 @@ describe('TextInput', () => {
     expect(errorMessage).toBeInTheDocument();
   });
 
-  // Full disclosure - ran into a problem with testing user input on a controlled component here and had a brain freeze!
-  // With more time I'd probably solve this with a componet that fleshes out a use case, and test against that
   it('calls onChange on input change', async () => {
     const onChange = jest.fn();
     render(<TextInput {...baseProps} label="test_label" onChange={onChange} />);
 
-    const textInput = screen.getByRole('textbox', { id: 'testInput' });
+    const textInput = screen.getByRole('textbox', { name: 'test_label' });
     userEvent.type(textInput, 'a');
 
     expect(onChange).toHaveBeenLastCalledWith('a');

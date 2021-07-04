@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Checkbox from '../FormInputs/Checkbox';
 import { FormPageProps } from '../FormPage';
 
@@ -16,12 +16,6 @@ const PrivacyPage = ({
   pageValues,
   onPageValuesChange,
 }: FormPageProps<PrivacyPageValues>) => {
-  useEffect(() => {
-    if (!pageValues) {
-      onPageValuesChange(defaultValues);
-    }
-  });
-
   if (!pageValues) return null;
 
   const { receiveTrayIoUpdates, receiveRelatedProductUpdates } = pageValues;
@@ -38,11 +32,13 @@ const PrivacyPage = ({
       <Checkbox
         value={receiveTrayIoUpdates}
         onChange={onFieldChange('receiveTrayIoUpdates')}
+        id="receiveTrayIoUpdatesInput"
         label="Receive updates about Tray.io by email"
       />
       <Checkbox
         value={receiveRelatedProductUpdates}
         onChange={onFieldChange('receiveRelatedProductUpdates')}
+        id="receiveRelatedProductUpdatesInput"
         label="Receive communication by email for other products created by the Tray.io team"
       />
     </>

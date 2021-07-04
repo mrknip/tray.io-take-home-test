@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import TextInput from '../FormInputs/TextInput';
 import { FormPageProps } from '../FormPage';
 
@@ -21,12 +21,6 @@ const UserPage = ({
   pageValueValidationErrors = {},
   onPageValuesChange,
 }: FormPageProps<UserPageValues>) => {
-  // useEffect(() => {
-  //   if (!pageValues) {
-  //     onPageValuesChange(defaultValues);
-  //   }
-  // });
-
   if (!pageValues) return null;
 
   const { name, role, email, password } = pageValues;

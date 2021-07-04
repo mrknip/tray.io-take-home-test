@@ -15,7 +15,7 @@ interface TextInputProps {
   /**  User-facing label for the input */
   label: string;
   /** Warning message to user - typically for failed validation */
-  errorMessage: string;
+  errorMessage?: string;
   /**  Flag to set input as required field */
   isRequired?: boolean;
   /**  Flag to toggle text input type */

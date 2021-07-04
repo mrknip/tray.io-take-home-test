@@ -6,12 +6,13 @@ import {
 } from './Checkbox.styled';
 
 interface CheckboxProps {
+  id: string;
   value: boolean;
   label: string;
   onChange: (newValue: boolean) => void;
 }
 
-const Checkbox = ({ value, label, onChange }: CheckboxProps) => {
+const Checkbox = ({ id, value, label, onChange }: CheckboxProps) => {
   const handleToggle = () => onChange(!value);
   const handleKeyUp = (e: React.SyntheticEvent) => {
     const nativeEvent = e.nativeEvent as KeyboardEvent;
@@ -22,10 +23,19 @@ const Checkbox = ({ value, label, onChange }: CheckboxProps) => {
 
   return (
     <CheckboxContainer>
-      <CheckboxInput tabIndex={0} onKeyUp={handleKeyUp} onClick={handleToggle}>
+      <CheckboxInput
+        id={id}
+        role="checkbox"
+        aria-label={label}
+        tabIndex={0}
+        onKeyUp={handleKeyUp}
+        onClick={handleToggle}
+      >
         {value === true && <div>✓</div>}
       </CheckboxInput>
-      <CheckBoxLabel>{label}</CheckBoxLabel>
+      <CheckBoxLabel onClick={handleToggle} htmlFor={id}>
+        {label}
+      </CheckBoxLabel>
     </CheckboxContainer>
   );
 };
