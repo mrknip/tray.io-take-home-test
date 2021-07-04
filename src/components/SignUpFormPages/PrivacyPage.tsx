@@ -7,7 +7,7 @@ interface PrivacyPageValues {
   receiveRelatedProductUpdates: boolean;
 }
 
-const defaultValues = {
+export const defaultValues = {
   receiveTrayIoUpdates: false,
   receiveRelatedProductUpdates: false,
 };

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import TextInput from '../FormInputs/TextInput';
 import { FormPageProps } from '../FormPage';
-import useFormPageReset from '../../hooks/useFormPageReset';
 
 interface UserPageValues {
   name: string;
@@ -10,7 +9,7 @@ interface UserPageValues {
   password: string;
 }
 
-const defaultValues = {
+export const defaultValues = {
   name: '',
   role: '',
   email: '',
@@ -22,11 +21,11 @@ const UserPage = ({
   pageValueValidationErrors = {},
   onPageValuesChange,
 }: FormPageProps<UserPageValues>) => {
-  useEffect(() => {
-    if (!pageValues) {
-      onPageValuesChange(defaultValues);
-    }
-  });
+  // useEffect(() => {
+  //   if (!pageValues) {
+  //     onPageValuesChange(defaultValues);
+  //   }
+  // });
 
   if (!pageValues) return null;
 

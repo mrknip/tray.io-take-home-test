@@ -1,7 +1,11 @@
 import React from 'react';
 import MultiPageForm from './MultiPageForm';
-import UserPage from './SignUpFormPages/UserPage';
-import PrivacyPage from './SignUpFormPages/PrivacyPage';
+import UserPage, {
+  defaultValues as userPageDefaultValues,
+} from './SignUpFormPages/UserPage';
+import PrivacyPage, {
+  defaultValues as privacyPageDefaultValues,
+} from './SignUpFormPages/PrivacyPage';
 import ConfirmationPage from './SignUpFormPages/ConfirmationPage';
 import {
   isNotEmpty,
@@ -19,8 +23,13 @@ const SignUpForm = () => {
         email: [isNotEmpty, isValidEmail],
         password: [isNotEmpty, isValidPassword],
       },
+      startingValues: userPageDefaultValues,
     },
-    { display: PrivacyPage, name: 'Privacy' },
+    {
+      display: PrivacyPage,
+      name: 'Privacy',
+      startingValues: privacyPageDefaultValues,
+    },
     { display: ConfirmationPage, name: 'Done' },
   ];
 
