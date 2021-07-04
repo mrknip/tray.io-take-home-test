@@ -30,7 +30,7 @@ const SignUpForm = () => {
       name: 'Privacy',
       startingValues: privacyPageDefaultValues,
     },
-    { display: ConfirmationPage, name: 'Done' },
+    // { display: ConfirmationPage, name: 'Done' },
   ];
 
   const onSubmit = (formData: Record<string, any>) => {

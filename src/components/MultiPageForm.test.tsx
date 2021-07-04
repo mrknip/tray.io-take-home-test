@@ -1,11 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import MultiPageForm from './MultiPageForm';
-import { FormPageProps } from './FormPage';
+import { FormPageProps } from '../types';
 
 describe('MultiPageForm', () => {
   const PageA = (props: FormPageProps<{ pageAValue: string }>) => {
     const { pageValues = { pageAValue: '' }, pageValueValidationErrors = {} } =
       props;
+
     return (
       <>
         <div>page A content</div>

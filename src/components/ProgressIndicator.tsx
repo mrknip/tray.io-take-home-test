@@ -12,16 +12,14 @@ interface ProgressIndicatorProps {
 const ProgressIndicator = ({
   currentStep,
   stepNames,
-}: ProgressIndicatorProps) => {
-  return (
-    <ProgressIndicatorContainer>
-      {stepNames.map((stepName, index) => (
-        <StepNameContainer key={stepName} isActive={index === currentStep}>
-          {stepName}
-        </StepNameContainer>
-      ))}
-    </ProgressIndicatorContainer>
-  );
-};
+}: ProgressIndicatorProps) => (
+  <ProgressIndicatorContainer>
+    {stepNames.map((stepName, index) => (
+      <StepNameContainer key={stepName} isActive={index === currentStep}>
+        {stepName}
+      </StepNameContainer>
+    ))}
+  </ProgressIndicatorContainer>
+);
 
 export default ProgressIndicator;

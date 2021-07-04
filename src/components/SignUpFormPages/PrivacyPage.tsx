@@ -1,6 +1,6 @@
 import React from 'react';
 import Checkbox from '../FormInputs/Checkbox';
-import { FormPageProps } from '../FormPage';
+import { FormPageProps } from '../../types';
 
 interface PrivacyPageValues {
   receiveTrayIoUpdates: boolean;

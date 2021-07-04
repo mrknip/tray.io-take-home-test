@@ -11,6 +11,7 @@ interface TextInputFieldProps {
 export const TextInputField = styled.input<TextInputFieldProps>`
   display: block;
   border: ${(props) => (props.hasError ? '2px solid red' : '2px solid black')};
+  border-radius: 2px;
   box-sizing: border-box;
   width: 100%;
   margin-top: 8px;

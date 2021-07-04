@@ -11,7 +11,7 @@ import ProgressIndicator from './ProgressIndicator';
 
 interface FormPageData {
   /** React component, forms the display of the page, houses the form inputs.  Must implement interface FormPageProps */
-  display: any; // I struggled with the typing for React components throughout this exercise
+  display: any; // TODO: this needs typing that works when passed the component - I did not wrangle Typescript in time for the deadline!
   /** The page name - used in the progress display */
   name: string;
   /** The starting values for fields in each page */
@@ -33,6 +33,7 @@ interface MultiPageFormProps {
 
 const MultiPageForm = ({ pages, onSubmit }: MultiPageFormProps) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
+
   const isLastPageToEnter = currentPage === pages.length - 2;
   const isConfirmationPage = currentPage === pages.length - 1;
 
@@ -107,7 +108,6 @@ const MultiPageForm = ({ pages, onSubmit }: MultiPageFormProps) => {
     }
 
     onSubmit(formData);
-
     goToNextPage();
   };
 

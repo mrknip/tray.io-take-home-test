@@ -11,8 +11,6 @@ describe('Form validators', () => {
     it('fails invalid cases', () => {
       const defaultError = 'Please fill out this required field';
       expect(isNotEmpty('')).toBe(defaultError);
-      expect(isNotEmpty(null)).toBe(defaultError);
-      expect(isNotEmpty(undefined)).toBe(defaultError);
     });
   });
 

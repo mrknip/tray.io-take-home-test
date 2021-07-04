@@ -1,6 +1,6 @@
 import React from 'react';
 import TextInput from '../FormInputs/TextInput';
-import { FormPageProps } from '../FormPage';
+import { FormPageProps } from '../../types';
 
 interface UserPageValues {
   name: string;
