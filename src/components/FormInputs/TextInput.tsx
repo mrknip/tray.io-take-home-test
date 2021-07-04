@@ -4,6 +4,7 @@ import {
   TextInputLabel,
   RequiredIndicator,
   TextInputField,
+  ErrorMessage,
 } from './TextInput.styled';
 
 interface TextInputProps {
@@ -13,6 +14,8 @@ interface TextInputProps {
   onChange: (value: string) => void;
   /**  User-facing label for the input */
   label: string;
+  /** Warning message to user - typically for failed validation */
+  errorMessage: string;
   /**  Flag to set input as required field */
   isRequired?: boolean;
   /**  Flag to toggle text input type */
@@ -25,10 +28,13 @@ const TextInput = ({
   value,
   onChange,
   label,
+  errorMessage,
   inputType = 'text',
   isRequired = false,
   id,
 }: TextInputProps) => {
+  const hasError = !!errorMessage;
+
   return (
     <TextInputContainer>
       <TextInputLabel htmlFor={id}>
@@ -43,7 +49,9 @@ const TextInput = ({
         }}
         type={inputType}
         required={isRequired}
+        hasError={hasError}
       />
+      {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </TextInputContainer>
   );
 };

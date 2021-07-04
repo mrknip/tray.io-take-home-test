@@ -1,6 +1,4 @@
-type ValidatorMap = {
-  [validatorName: string]: { (value: any): string | null }[];
-};
+import { ValidatorMap } from '../types';
 
 const getValidationErrors = (
   values: Record<string, any>,

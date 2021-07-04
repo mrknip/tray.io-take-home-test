@@ -31,6 +31,19 @@ describe('TextInput', () => {
     expect(textInput).toHaveDisplayValue('test value');
   });
 
+  it('errorMessage not empty - renders error message', () => {
+    render(
+      <TextInput
+        {...baseProps}
+        value="test value"
+        label="test_label"
+        errorMessage="test error"
+      />,
+    );
+    const errorMessage = screen.getByText('test error');
+    expect(errorMessage).toBeInTheDocument();
+  });
+
   // Full disclosure - ran into a problem with testing user input on a controlled component here and had a brain freeze!
   // With more time I'd probably solve this with a componet that fleshes out a use case, and test against that
   it('calls onChange on input change', async () => {

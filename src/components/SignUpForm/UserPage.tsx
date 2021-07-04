@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormContainer } from '../FormPage.styled';
 import TextInput from '../FormInputs/TextInput';
+import { ValidatorMap } from '../../types';
 
 interface UserPageValues {
   name: string;
@@ -18,12 +19,14 @@ const defaultValues = {
 
 interface UserPageProps {
   pageValues?: UserPageValues;
+  pageValueValidationErrors?: Record<string, any>;
   onPageValuesChange: (newPageValues: UserPageValues) => void;
   onConfirm?: () => void;
 }
 
 const UserPage = ({
   pageValues = defaultValues,
+  pageValueValidationErrors = {},
   onPageValuesChange,
   onConfirm,
 }: UserPageProps) => {
@@ -43,6 +46,7 @@ const UserPage = ({
       <TextInput
         value={name}
         onChange={onFieldChange('name')}
+        errorMessage={pageValueValidationErrors.name}
         label="name:"
         id="name"
         isRequired
@@ -50,12 +54,14 @@ const UserPage = ({
       <TextInput
         value={role}
         onChange={onFieldChange('role')}
+        errorMessage={pageValueValidationErrors.role}
         label="role:"
         id="role"
       />
       <TextInput
         value={email}
         onChange={onFieldChange('email')}
+        errorMessage={pageValueValidationErrors.email}
         label="email:"
         id="email"
         inputType="email"
@@ -64,6 +70,7 @@ const UserPage = ({
       <TextInput
         value={password}
         onChange={onFieldChange('password')}
+        errorMessage={pageValueValidationErrors.password}
         label="password:"
         id="password"
         inputType="password"

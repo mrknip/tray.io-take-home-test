@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { SubmitButton } from './MultiPageForm.styled';
 import getValidationErrors from '../helpers/getValidationErrors';
+import { ValidatorMap } from '../types';
+
 interface FormPage {
   display: any; // TODO - get correct typing
   name: string;
-  validators?: Record<string, { (value: string): string | null }[]>;
+  validators?: ValidatorMap;
 }
 
 interface MultiPageFormProps {
@@ -50,6 +52,7 @@ const MultiPageForm = ({ pages, endScreen }: MultiPageFormProps) => {
 
       <ActivePage
         pageValues={formData[currentPage]}
+        pageValueValidationErrors={validationErrors}
         onPageValuesChange={handlePageValuesChange}
       />
 
