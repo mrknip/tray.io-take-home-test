@@ -8,15 +8,16 @@ import {
 import getValidationErrors from '../helpers/getValidationErrors';
 import { ValidatorMap } from '../types';
 import ProgressIndicator from './ProgressIndicator';
+import { FormPageProps } from './FormPage';
 
-interface FormPage {
+interface FormPageData {
   display: any; // I struggled with the typing for React components throughout this exercise
   name: string;
   validators?: ValidatorMap;
 }
 
 interface MultiPageFormProps {
-  pages: FormPage[];
+  pages: FormPageData[];
   onSubmit: (formData: Record<string, any>) => void;
 }
 
@@ -83,7 +84,7 @@ const MultiPageForm = ({ pages, onSubmit }: MultiPageFormProps) => {
   const activePage = (
     <ActivePage
       pageValues={formData[currentPage]}
-      pageValueValidationErrors={showErrors && validationErrors}
+      pageValueValidationErrors={showErrors ? validationErrors : undefined}
       onPageValuesChange={handlePageValuesChange}
     />
   );

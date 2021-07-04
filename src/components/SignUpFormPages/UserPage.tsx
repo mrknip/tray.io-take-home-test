@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import TextInput from '../FormInputs/TextInput';
 import { FormPageProps } from '../FormPage';
+import useFormPageReset from '../../hooks/useFormPageReset';
 
 interface UserPageValues {
   name: string;
@@ -20,7 +21,6 @@ const UserPage = ({
   pageValues,
   pageValueValidationErrors = {},
   onPageValuesChange,
-  onConfirm,
 }: FormPageProps<UserPageValues>) => {
   useEffect(() => {
     if (!pageValues) {

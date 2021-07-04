@@ -15,7 +15,6 @@ const defaultValues = {
 const PrivacyPage = ({
   pageValues,
   onPageValuesChange,
-  onConfirm,
 }: FormPageProps<PrivacyPageValues>) => {
   useEffect(() => {
     if (!pageValues) {
