@@ -24,11 +24,7 @@ function App() {
 
   const endScreen = <div>Well done</div>;
 
-  return (
-    <div>
-      <MultiPageForm pages={pages} endScreen={endScreen} />
-    </div>
-  );
+  return <MultiPageForm pages={pages} endScreen={endScreen} />;
 }
 
 export default App;

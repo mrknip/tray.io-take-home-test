@@ -1,5 +1,3 @@
-import { values } from 'core-js/core/array';
-
 export const isNotEmpty = (value: string, errorMessage?: string) => {
   if (value && value.length > 0) {
     return null;
@@ -24,13 +22,13 @@ export const isValidEmail = (value: string) => {
 };
 
 export const isValidPassword = (value: string) => {
-  const errors = {
+  const errors: Record<string, boolean> = {
     length: false,
     digit: false,
     case: false,
   };
 
-  const errorMessages = {
+  const errorMessages: Record<string, string> = {
     length: 'at least 9 characters',
     digit: 'at least one number',
     case: 'both upper and lower case letters',
@@ -56,7 +54,7 @@ export const isValidPassword = (value: string) => {
     return null;
   }
 
-  const validationMessageParts = [];
+  const validationMessageParts: string[] = [];
   Object.keys(errors).forEach((errorType) => {
     if (errors[errorType]) {
       validationMessageParts.push(errorMessages[errorType]);
