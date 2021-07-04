@@ -48,7 +48,6 @@ const TextInput = ({
           onChange(e.target.value);
         }}
         type={inputType}
-        required={isRequired}
         hasError={hasError}
       />
       {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}

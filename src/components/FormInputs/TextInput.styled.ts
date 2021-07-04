@@ -14,6 +14,7 @@ export const TextInputField = styled.input<TextInputFieldProps>`
   box-sizing: border-box;
   width: 100%;
   margin-top: 8px;
+  margin-bottom: 16px;
   padding: 4px;
 `;
 
@@ -23,9 +24,7 @@ export const ErrorMessage = styled.div`
   padding: 8px;
 `;
 
-export const TextInputLabel = styled.label`
-  font-size: 14px;
-`;
+export const TextInputLabel = styled.label``;
 
 export const RequiredIndicator = styled.span`
   color: red;

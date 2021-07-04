@@ -21,7 +21,7 @@ interface MultiPageFormProps {
 }
 
 const MultiPageForm = ({ pages }: MultiPageFormProps) => {
-  const [currentPage, setCurrentPage] = useState<number>(2);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [validationErrors, setValidationErrors] = useState<Record<string, any>>(
     {},
@@ -58,6 +58,10 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
   const handlePageSubmit = () => {
     const hasErrors =
       Object.values(validationErrors).filter((v) => v !== null).length > 0;
+
+    console.log({ ...formData });
+    console.log({ ...validationErrors });
+    console.log({ hasErrors });
     if (hasErrors) {
       setShowErrors(true);
     } else {
@@ -66,6 +70,14 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
   };
 
   const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+
+    // Prevent submit on pressing enter on interim stage
+    if (!isLastPageToEnter) {
+      handlePageSubmit();
+      return;
+    }
+
     console.log(`Form submitted! Data:`);
     const combinedFormValues = Object.values(formData).reduce(
       (pageValues, out) => ({ ...out, ...pageValues }),
@@ -74,7 +86,6 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
     console.log(JSON.stringify(combinedFormValues, null, 2));
 
     goToNextPage();
-    e.preventDefault();
   };
 
   const activePage = (
@@ -95,11 +106,11 @@ const MultiPageForm = ({ pages }: MultiPageFormProps) => {
       {isConfirmationPage ? (
         <EndScreenContainer>{activePage}</EndScreenContainer>
       ) : (
-        <FormPageContainer>
+        <FormPageContainer onSubmit={handleFormSubmit}>
           {activePage}
 
           {isLastPageToEnter ? (
-            <SubmitButton type="submit" onClick={handleFormSubmit} />
+            <SubmitButton type="submit" />
           ) : (
             <NextPageButton onClick={handlePageSubmit}>Submit</NextPageButton>
           )}

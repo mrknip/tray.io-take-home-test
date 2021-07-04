@@ -17,7 +17,7 @@ const defaultValues = {
 };
 
 const UserPage = ({
-  pageValues = defaultValues,
+  pageValues,
   pageValueValidationErrors = {},
   onPageValuesChange,
   onConfirm,
