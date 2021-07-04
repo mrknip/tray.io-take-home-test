@@ -54,9 +54,11 @@ const MultiPageForm = ({ pages, onSubmit }: MultiPageFormProps) => {
 
       setValidationErrors(startingValidationErrors);
     }
-
-    setShowErrors(false);
   }, [currentPage, currentPageValidators, formData]);
+
+  useEffect(() => {
+    setShowErrors(false);
+  }, [currentPage]);
 
   useEffect(() => {
     const startingFormData: Record<string, any> = pages.reduce(
