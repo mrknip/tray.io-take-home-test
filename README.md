@@ -30,7 +30,7 @@ If you wanted to tinker with the code as part of your review, then:
 
 #### Method 3: lazy option
 
-It's up on netlify in case of environment issues, or if you're feeling lazy: https://djohnson-trayio-test.netlify.app/[https://djohnson-trayio-test.netlify.app/]
+It's up on netlify in case of environment issues, or if you're feeling lazy: [https://djohnson-trayio-test.netlify.app/]
 
 ## To run tests
 
